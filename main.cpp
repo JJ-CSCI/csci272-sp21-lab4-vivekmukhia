@@ -8,9 +8,35 @@ using Catch::Matchers::Equals;
 
 // Fix the following class
 class Complex {
+  private:
+        int inta, intb;
+  public:
+
+        Complex(int inta=0,int intb=0);
+        int inta();
+        int intb();
     void operator>>(std::string&) const;
     void operator<<(const std::string&);
 };
+//Complex.cpp
+#include "Complex.h"
+Complex::Complex(int inta, int intb)
+{
+        this->inta = inta;
+        this->intb = intb;
+
+}
+
+int Complex::inta()
+{
+        return this->inta;
+}
+
+int Complex::intb()
+{
+        return this->intb;
+}
+
 
 //------------------------------
 //   DO NOT MODIFY TEST CASES
