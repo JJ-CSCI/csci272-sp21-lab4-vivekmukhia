@@ -8,9 +8,57 @@ using Catch::Matchers::Equals;
 
 // Fix the following class
 class Complex {
-    void operator>>(std::string&) const;
-    void operator<<(const std::string&);
+
+private:
+    int a;
+    int b;
+public:
+    Complex(int a=0, int b=0)
+    {
+        this->a = a;
+        this->b = b;
+    }
+
+    int re()
+    {
+        return a;
+    }
+
+    int im()
+    {
+        return b;
+    }
+
+    void operator>>(std::string& s) const
+    {
+        
+        s += std::to_string(a);
+        
+        if (b >= 0)
+            s += '+';
+        s += std::to_string(b);
+        s += 'i';
+    }
+
+    void operator<<(const std::string& s)
+    {
+        int seprator;
+
+        for (int i = s.size() - 1; i >= 0; i--)
+        {
+           
+            if (s[i] == '+' || s[i] == '-')
+            {
+                seprator = i;
+                break;
+            }
+        }
+
+        this->a = stoi(s.substr(0, seprator));
+        this->b = stoi(s.substr(seprator, s.size() - seprator - 1));
+    }
 };
+
 
 //------------------------------
 //   DO NOT MODIFY TEST CASES
