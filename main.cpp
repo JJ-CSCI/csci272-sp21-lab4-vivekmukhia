@@ -8,34 +8,56 @@ using Catch::Matchers::Equals;
 
 // Fix the following class
 class Complex {
-  private:
-        int inta, intb;
-  public:
 
-        Complex(int inta=0,int intb=0);
-        int inta();
-        int intb();
-    void operator>>(std::string&) const;
-    void operator<<(const std::string&);
+private:
+    int a;
+    int b;
+public:
+    Complex(int a=0, int b=0)
+    {
+        this->a = a;
+        this->b = b;
+    }
+
+    int re()
+    {
+        return a;
+    }
+
+    int im()
+    {
+        return b;
+    }
+
+    void operator>>(std::string& s) const
+    {
+        
+        s += std::to_string(a);
+        
+        if (b >= 0)
+            s += '+';
+        s += std::to_string(b);
+        s += 'i';
+    }
+
+    void operator<<(const std::string& s)
+    {
+        int seprator;
+
+        for (int i = s.size() - 1; i >= 0; i--)
+        {
+           
+            if (s[i] == '+' || s[i] == '-')
+            {
+                seprator = i;
+                break;
+            }
+        }
+
+        this->a = stoi(s.substr(0, seprator));
+        this->b = stoi(s.substr(seprator, s.size() - seprator - 1));
+    }
 };
-//Complex.cpp
-#include "Complex.h"
-Complex::Complex(int inta, int intb)
-{
-        this->inta = inta;
-        this->intb = intb;
-
-}
-
-int Complex::inta()
-{
-        return this->inta;
-}
-
-int Complex::intb()
-{
-        return this->intb;
-}
 
 
 //------------------------------
